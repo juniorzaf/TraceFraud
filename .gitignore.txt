@@ -1,0 +1,25 @@
+# --- Environnements virtuels ---
+venv/
+.venv/
+env/
+
+# --- Cache et fichiers compilés Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# --- Fichiers d'environnement et secrets ---
+.env
+.env.local
+*.pem
+
+# --- Fichiers d'IDE et éditeurs ---
+.vscode/
+.idea/
+*.swp
+
+# --- Fichiers système ---
+.DS_Store
+Thumbs.db
