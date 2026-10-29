@@ -6,7 +6,7 @@ import streamlit as st
 
 # Configuration de la page Streamlit
 st.set_page_config(
-    page_title="Détection de Fraude Bancaire - Dashboard", page_icon="🛡️", layout="wide"
+    page_title="Détection de Fraude Bancaire -TraceFraud", page_icon="🛡️", layout="wide"
 )
 
 # Chemins dynamiques avec pathlib
