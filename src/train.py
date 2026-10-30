@@ -16,7 +16,7 @@ def train_fraud_model():
 
   déséquilibrées et évalue ses performances avec le PR-AUC.
   """
-  print("[INFO] Préparation des données pour l'entraînement...")
+  print("____ Préparation des données pour l'entraînement...")
 
   # 1. Chargement et traitement des données
   try:
@@ -27,7 +27,7 @@ def train_fraud_model():
     base_dir = Path(__file__).resolve().parent.parent
     processed_path = base_dir / "data" / "processed" / "clean_transactions.csv"
     if processed_path.exists():
-      print(f"[INFO] Chargement direct depuis le fichier transformé : {processed_path}")
+      print(f"____ Chargement direct depuis le fichier transformé : {processed_path}")
       df = pd.read_csv(processed_path)
     else:
       raise FileNotFoundError(f"Impossible de charger les données. Erreur d'origine : {e}")
@@ -44,8 +44,8 @@ def train_fraud_model():
   X = df.drop(columns=drop_cols)
   y = df[target_col]
 
-  print(f"[INFO] Dimensions des features (X) : {X.shape}")
-  print(f"[INFO] Taux de fraude global : {y.mean():.4f} ({y.sum()} cas frauduleux sur {len(y)} transactions)")
+  print(f"____ Dimensions des features (X) : {X.shape}")
+  print(f"____ Taux de fraude global : {y.mean():.4f} ({y.sum()} cas frauduleux sur {len(y)} transactions)")
 
   # 3. Division Train/Test stratifiée
   X_train, X_test, y_train, y_test = train_test_split(
@@ -56,7 +56,7 @@ def train_fraud_model():
   neg_count = (y_train == 0).sum()
   pos_count = (y_train == 1).sum()
   scale_pos_weight = neg_count / pos_count if pos_count > 0 else 1.0
-  print(f"[INFO] scale_pos_weight calculé pour XGBoost : {scale_pos_weight:.2f}")
+  print(f"____ scale_pos_weight calculé pour XGBoost : {scale_pos_weight:.2f}")
 
   # 5. Initialisation et entraînement du modèle XGBoost
   model = XGBClassifier(
@@ -68,7 +68,7 @@ def train_fraud_model():
       eval_metric="aucpr"
   )
 
-  print("[INFO] Entraînement du modèle XGBoost en cours...")
+  print("...Entraînement du modèle XGBoost en cours...")
   model.fit(X_train, y_train)
 
   # 6. Évaluation sur l'ensemble de test
@@ -91,7 +91,7 @@ def train_fraud_model():
   model_path = models_dir / "xgboost_fraud_model.joblib"
 
   joblib.dump(model, model_path)
-  print(f"[INFO] Modèle sauvegardé avec succès dans : {model_path}")
+  print(f"Modèle sauvegardé avec succès dans : {model_path}")
 
   return model, pr_auc
 

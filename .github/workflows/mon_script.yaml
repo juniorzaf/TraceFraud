@@ -30,4 +30,4 @@ jobs:
 
       # Étape 4 : Exécuter votre script (remplacez 'main.py' par le nom de votre fichier)
       - name: Lancer le script
-        run: python dashbord.py
+        run: python app/dashbord.py

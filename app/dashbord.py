@@ -172,22 +172,22 @@ else:
 
     with col1:
       st.subheader("Résultat de l'Analyse")
-      st.metric(label="Probabilité de Fraude estimée", value=f"{fraud_prob * 100:.2f}%")
+      st.metric(label="Probabilité de Fraude estimée", value=f"{fraud_prob*100 :.2f}%")
 
       # Seuils de décision métier
       if fraud_prob >= 0.7:
         st.error(
-            "🚨 **ALERTE ROUGE : Transaction hautement suspecte !** Recommandation"
+            " **ALERTE ROUGE : Transaction hautement suspecte !** Recommandation"
             " : Bloquer la transaction et contacter le client."
         )
       elif fraud_prob >= 0.3:
         st.warning(
-            "⚠️ **RISQUE MODÉRÉ :** Transaction atypique. Recommandation :"
+            "**RISQUE MODÉRÉ :** Transaction atypique. Recommandation :"
             " Soumettre à une vérification 3-D Secure / SMS."
         )
       else:
         st.success(
-            "✅ **TRANSACTION SÛRE :** Aucun indicateur critique majeur détecté."
+            "**TRANSACTION SÛRE :** Aucun indicateur critique majeur détecté."
             " Autorisation validée."
         )
 

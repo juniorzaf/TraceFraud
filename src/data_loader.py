@@ -17,7 +17,7 @@ def load_raw_data(filename: str = "credit_card_fraud_2026.csv") -> pd.DataFrame:
 
   # Chargement des données
   df = pd.read_csv(raw_data_path)
-  print(f"[INFO] Données chargées avec succès : {df.shape[0]} lignes et {df.shape[1]} colonnes.")
+  print(f"*** Données chargées avec succès : {df.shape[0]} lignes et {df.shape[1]} colonnes.")
 
   return df
 
