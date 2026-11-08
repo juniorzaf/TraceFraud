@@ -6,7 +6,7 @@ import pandas as pd
 def extract_and_clean_features(df):
   df = df.copy()
 
-  # Création des nouvelles features (votre code)
+  #Création des nouvelles features (voir analyse exploratoire de Yasmine)
   df["amount_to_balance_ratio"] = df["amount_usd"] / (df["account_balance_usd"] + 1)
 
   risk_flags = [
@@ -20,7 +20,7 @@ def extract_and_clean_features(df):
   df["is_weekend"] = (df["day_of_week"] >= 5).astype(int)
   df["card_age_ratio"] = df["card_age_months"] / (df["customer_age"] * 12 + 1)
 
-  # Encodage cyclique
+  #Encodage cyclique
   df["hour_sin"] = np.sin(2 * np.pi * df["time_of_day_hour"] / 24)
   df["hour_cos"] = np.cos(2 * np.pi * df["time_of_day_hour"] / 24)
   df["dow_sin"] = np.sin(2 * np.pi * df["day_of_week"] / 7)
@@ -41,7 +41,7 @@ def extract_and_clean_features(df):
 
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
   print("Début du Feature Engineering sur les colonnes spécifiques")
-  # Création de nouvelle features
+  #Création de nouvelle features
   data=extract_and_clean_features(df)
 
   #Encodage des variables booléennes
@@ -58,7 +58,7 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
       data[col] = data[col].astype(int)
   print("Variables booléennes converties en entiers (0/1).")
 
-  # Encodage One-Hot pour les variables catégorielles (merchant_category, card_type, auth_method, channel, device_type)
+  #Encodage One-Hot pour les variables catégorielles (merchant_category, card_type, auth_method, channel, device_type)
   cat_cols = ["merchant_category", "card_type", "auth_method", "channel", "device_type"]
   existing_cats = [c for c in cat_cols if c in data.columns]
 
@@ -66,7 +66,7 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     data = pd.get_dummies(data, columns=existing_cats, drop_first=True, dtype=int)
     print(f"Encodage One-Hot appliqué sur : {existing_cats}")
 
-  # Suppression de l'identifiant unique s'il est présent (inutile pour le modèle)
+  #Suppression de l'identifiant unique s'il est présent (inutile pour le modèle)
   if "transaction_id" in data.columns:
     # On peut le stocker temporairement ou le dropper pour l'entraînement
    data = data.drop(columns=['transaction_id'])
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     df_raw = load_raw_data()
     df_processed = engineer_features(df_raw)
 
-    # Sauvegarde dans data/processed
+    #Sauvegarde dans data/processed
     base_dir = Path(__file__).resolve().parent.parent
     processed_path = base_dir / "data" / "processed" / "clean_transactions.csv"
     processed_path.parent.mkdir(parents=True, exist_ok=True)

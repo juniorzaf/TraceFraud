@@ -5,17 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78b63f73-1c9e-479f-b323-7f48b8a1283e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/pages/accueil.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/analyse_descriptif.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/mon_script.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/mon_script.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/pages/analyse_donnees.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/explore_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/detection_fraude_carte_credit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/detection_fraude_carte_credit.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dashbord.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/processed/clean_transactions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/processed/clean_transactions.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/xgboost_fraud_model.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/models/xgboost_fraud_model.joblib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/accueil.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/accueil.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/analyse_descriptif.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/modelisation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/simulation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/modeling.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +52,12 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.__init__.executor": "Run",
+    "Python.app.executor": "Run",
     "Python.dashbord.executor": "Run",
     "Python.data_loader.executor": "Run",
+    "Python.explore_data.executor": "Run",
     "Python.features.executor": "Run",
+    "Python.modelisation.executor": "Run",
     "Python.simulation.executor": "Run",
     "Python.train.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
