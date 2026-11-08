@@ -3,30 +3,30 @@ import joblib
 import numpy as np
 import pandas as pd
 import streamlit as st
-
+#from src.features import extract_and_clean_features
 # Configuration de la page Streamlit
 st.set_page_config(
     page_title="Détection de Fraude Bancaire -TraceFraud", page_icon="🛡️", layout="wide"
 )
 
-# Chemins dynamiques avec pathlib
-BASE_DIR = Path(__file__).resolve().parent.parent
-MODEL_PATH = BASE_DIR / "models" / "xgboost_fraud_model.joblib"
+#Chemins dynamiques avec pathlib
+#On remonte à la racine
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+#on pointe vers le dossier model puis vers le fichier du modèle
+MODEL_PATH = BASE_DIR /"models" / "xgboost_fraud_model.joblib"
+#On pointe vers les données nettoyées
 PROCESSED_DATA_PATH = BASE_DIR / "data" / "processed" / "clean_transactions.csv"
 
 
 @st.cache_resource
 def load_model_and_columns():
-  """Charge le modèle sérialisé et récupère la structure des colonnes
 
-  utilisées lors de l'entraînement pour garantir l'alignement des features.
-  """
   if not MODEL_PATH.exists():
     return None, None
 
   model = joblib.load(MODEL_PATH)
 
-  # Chargement d'une référence de colonnes depuis le dataset nettoyé si disponible
+  #Chargement d'une référence de colonnes depuis le dataset nettoyé si disponible
   feature_columns = None
   if PROCESSED_DATA_PATH.exists():
     df_ref = pd.read_csv(PROCESSED_DATA_PATH, nrows=5)
@@ -42,7 +42,7 @@ def load_model_and_columns():
 model, feature_columns = load_model_and_columns()
 
 # Titre principal
-st.title("🛡️ Système Intelligent de Détection de Fraude à la Carte Bancaire")
+st.title("Système Intelligent de Détection de Fraude à la Carte Bancaire")
 st.markdown(
     "Interface de simulation et d'évaluation des risques transactionnels en"
     " temps réel."
@@ -51,7 +51,7 @@ st.markdown(
 if model is None:
   st.error(
       f"Modèle introuvable à l'emplacement : {MODEL_PATH}. Veuillez d'abord"
-      " exécuter le script d'entraînement (`src/train.py`)."
+      " exécuter le script d'entraînement (`utils/train.py`)."
   )
 else:
   st.sidebar.header("Paramètres de la Transaction")
@@ -143,6 +143,8 @@ else:
 
     df_input = pd.DataFrame([input_data])
 
+    #Creation de nouvelle features
+    #df_input=extract_and_clean_features(df_input)
     # Encodage des booléens en entiers
     bool_cols = [
         "is_foreign_transaction",
@@ -156,25 +158,25 @@ else:
       if b_col in df_input.columns:
         df_input[b_col] = df_input[b_col].astype(int)
 
-    # Encodage One-Hot identique à l'entraînement
+    #Encodage One-Hot identique à l'entraînement
     cat_cols = ["merchant_category", "card_type", "auth_method", "channel", "device_type"]
     df_input = pd.get_dummies(df_input, columns=cat_cols, drop_first=True, dtype=int)
 
-    # Réalignement des colonnes sur celles attendues par le modèle
+    #Réalignement des colonnes sur celles attendues par le modèle
     if feature_columns:
       for col in feature_columns:
         if col not in df_input.columns:
           df_input[col] = 0
       df_input = df_input[feature_columns]
 
-    # Prédiction
+    #Prédiction
     fraud_prob = model.predict_proba(df_input)[0][1]
 
     with col1:
       st.subheader("Résultat de l'Analyse")
       st.metric(label="Probabilité de Fraude estimée", value=f"{fraud_prob*100 :.2f}%")
 
-      # Seuils de décision métier
+      #Seuils de décision métier
       if fraud_prob >= 0.7:
         st.error(
             " **ALERTE ROUGE : Transaction hautement suspecte !** Recommandation"
